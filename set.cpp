@@ -127,3 +127,19 @@ const Set& Set::operator=(const Set& set1)
 		return *this;
 	}
 }
+
+bool Set::operator==(const Set& set1) const
+{
+	{
+		if (sizeArrSet != set1.sizeArrSet)
+		{
+			return false;
+		}
+		for (int i{ 0 }; i < sizeArrSet; ++i) {
+			if (arrSet[i] != set1.arrSet[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+}
