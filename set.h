@@ -81,7 +81,10 @@ public:
 	
 	Set& setMembershipCheck();// проверка на принадлежность множеству
 
-
+	friend const Set operator+(const Set& set1, const Set& set2);//сложение объектов
+	friend const Set operator+(const Set& set1, int a);//объект с интом
+	const Set& operator=(const Set& set1);// присваивание
+	
 
 };
 

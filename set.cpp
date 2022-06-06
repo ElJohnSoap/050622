@@ -14,6 +14,23 @@ int inputInt()
 	return a;
 }
 
+const Set operator+(const Set& set1, const Set& set2)
+{
+	Set temp(set1);
+	for (int i = 0; i < set2.sizeArrSet; i++)
+	{
+		temp.add(set2.arrSet[i]);
+	}
+	return temp;
+}
+
+const Set operator+(const Set& set1, int a)
+{
+	Set temp(set1);
+	temp.add(a);
+	return temp;
+}
+
 ostream& operator<<(ostream& output, const Set& set)
 {
 	if (set.arrSet != nullptr)
@@ -89,4 +106,24 @@ Set& Set::setMembershipCheck()
 	}
 	answer(unic);
 	return *this;
+}
+
+const Set& Set::operator=(const Set& set1)
+{
+	{
+		if (&set1 != this)
+		{
+			if (sizeArrSet != set1.sizeArrSet)
+			{
+				delete[] arrSet;
+				sizeArrSet = set1.sizeArrSet;
+				arrSet = new int[sizeArrSet];
+			}
+			for (int i = 0; i < sizeArrSet; ++i)
+			{
+				arrSet[i] = set1.arrSet[i];
+			}
+		}
+		return *this;
+	}
 }

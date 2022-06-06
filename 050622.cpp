@@ -20,5 +20,11 @@ int main()
    set3.setMembershipCheck();
    set3.del();
    cout << set3;
+   Set set4(set3 + set2);
+   
+   cout << set4;
+   Set set5;
+   set5 = set4 + 15;
+   cout << set5;
 }
 
