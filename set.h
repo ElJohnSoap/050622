@@ -18,63 +18,70 @@ public:
 		else
 		{
 			arrSet = new int[size];
-			
-
 		}
+		cout << "\nотработал конструктор 1\n" << this << endl;
 		
 	}
 	
 	Set(int size, int* arr) : sizeArrSet{ size }, arrSet{ new int [sizeArrSet] {} }
 	{
-		for (int i = 0; i < sizeArrSet; i++)
+		bool unic = true;
+		for (int i = 0; i < size; i++)
 		{
-			this->arrSet[i] = arr[i];
+			for (int j = i + 1; j < size; j++)
+			{
+				if (arr[i] == arr[j])
+				{
+					unic = false;
+				}
+			}
+			if (unic == false)
+				break;
 		}
+		if (unic)
+		{
+			for (int i = 0; i < sizeArrSet; i++)
+			{
+				arrSet[i] = arr[i];
+			}
+		}
+		else
+		{
+			arrSet = nullptr;
+			cout << "\nМножество не создано, элементы не уникальны\n";
+		}
+		cout << "\nотработал конструктор 2\n" << this << endl;
 	}
 	
 
-	Set() : Set(0) {}
+	Set() : Set(0) { cout << "\nотработал конструктор 3\n" << this << endl; }
 
 	~Set()
 	{
 		delete[]arrSet;
-		cout << "отработал деструктор";
+		cout << "\nотработал деструктор\n" << this << endl;
 	}
 
-	friend ostream& operator << (ostream& output, const Set& set)
+	Set (const Set& set) : arrSet{ new int[set.sizeArrSet] }, sizeArrSet {set.sizeArrSet} //конструктор копирования
 	{
-		for (int i = 0; i < set.sizeArrSet; i++)
+		for (int i{ 0 }; i < sizeArrSet; ++i)
 		{
-			output << set.arrSet[i] << " ";
+			arrSet[i] = set.arrSet[i];
 		}
-		return output;
 	}
+	friend ostream& operator << (ostream& output, const Set& set);//перегрузка cout
+	
+	friend istream& operator>>(istream& input, Set& set);//перегрузка cin
 
-	friend istream& operator>>(istream& input, Set& set)
-	{
-		for (int i{ 0 }; i < set.sizeArrSet; ++i)
-		{
-			input >> set.arrSet[i];
-		}
-		return input;
-	}
+	Set& add(const int c); //добавление элемента
 
-	Set& add(const int c)
-	{
-		int* temp = new int[sizeArrSet+1];
-		for (int i = 0; i < sizeArrSet; i++)
-		{
-			if (arrSet[i] = c)
-			{
-				return;
-			}
-			temp[i] = arrSet[i];
-		}
-		temp[sizeArrSet] = c;
-		delete[]arrSet;
-		arrSet = temp;
-		sizeArrSet = ++sizeArrSet;
-	}
+	Set& del();
+
+	friend int inputInt();
+	
+	Set& setMembershipCheck();// проверка на принадлежность множеству
+
+
 
 };
 
