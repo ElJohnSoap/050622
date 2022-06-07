@@ -26,5 +26,7 @@ int main()
    Set set5;
    set5 = set4 + 15;
    cout << set5;
+   set3 += set4;
+   cout << set3;
 }
 

@@ -108,6 +108,15 @@ Set& Set::setMembershipCheck()
 	return *this;
 }
 
+Set Set::operator+=(const Set& set1)
+{
+	for (int i = 0; i < set1.sizeArrSet; i++)
+	{
+		this->add(set1.arrSet[i]);
+	}
+	return Set();
+}
+
 const Set& Set::operator=(const Set& set1)
 {
 	{
