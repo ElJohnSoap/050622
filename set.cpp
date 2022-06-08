@@ -31,6 +31,18 @@ const Set operator+(const Set& set1, int a)
 	return temp;
 }
 
+const Set operator-(const Set& set1, const Set& set2)
+{
+	{
+		Set temp(set1);
+		for (int j = 0; j < set2.sizeArrSet; j++)
+		{
+			temp.del(set2.arrSet[j]);
+		}
+		return temp;
+	}
+}
+
 ostream& operator<<(ostream& output, const Set& set)
 {
 	if (set.arrSet != nullptr)
@@ -91,6 +103,24 @@ Set& Set::del()
 	return *this;
 }
 
+Set& Set::del(const int c)
+{
+	int* temp = new int[sizeArrSet - 1];
+	for (int i = 0, j = 0; i < sizeArrSet; i++, j++)
+	{
+		if (arrSet[i] == c)
+		{
+			++i;
+		}
+		temp[j] = arrSet[i];
+	}
+	delete[]arrSet;
+	arrSet = temp;
+	sizeArrSet = sizeArrSet - 1;
+
+	return *this;
+}
+
 Set& Set::setMembershipCheck()
 {
 	int a = inputInt();
@@ -113,6 +143,15 @@ Set Set::operator+=(const Set& set1)
 	for (int i = 0; i < set1.sizeArrSet; i++)
 	{
 		this->add(set1.arrSet[i]);
+	}
+	return Set();
+}
+
+Set Set::operator-=(const Set& set1)
+{
+	for (int i = 0; i < set1.sizeArrSet; i++)
+	{
+		this->del(set1.arrSet[i]);
 	}
 	return Set();
 }

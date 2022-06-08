@@ -76,6 +76,7 @@ public:
 	Set& add(const int c); //добавление элемента
 
 	Set& del();
+	Set& del(const int c);
 
 	friend int inputInt();
 	
@@ -84,9 +85,11 @@ public:
 	friend const Set operator+(const Set& set1, const Set& set2);//сложение объектов
 	friend const Set operator+(const Set& set1, int a);//объект с интом
 	Set operator+=(const Set& set);
-	
+	friend const Set operator-(const Set& set1, const Set& set2);//вычитание объектов
+	Set operator-=(const Set& set1);
 	const Set& operator=(const Set& set1);// присваивание
-	bool operator==(const Set& set1) const;
+	bool operator==(const Set& set1) const; //сравнение
+
 	
 
 };
